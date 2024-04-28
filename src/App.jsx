@@ -7,9 +7,9 @@ function App() {
 
     return (
         <div className='App'>
-            <Hello/>
-            <FuncComponent name = {'Viva' + 11}/>
             <Card/>
+            {/*<Hello/>*/}
+            {/*<FuncComponent name = {'Viva' + 11}/>*/}
         </div>
     )
 }
