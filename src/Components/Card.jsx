@@ -1,18 +1,19 @@
 import React from "react";
-class Card extends React.Component{
+
+class Card extends React.Component {
     render() {
-        const {title} = this.props
-        const {text} = this.props
-        return <div className="card">
-            <div className="card-body">
-                <h4 className="card-title">hi</h4>
-                <p className="card-text">how are you?</p>
+        const {data} = this.props
+
+        return (
+            <div className="card">
+                <div className="card-body">
+                    {<h4 key={data[0].id}>{data[0].name}</h4>}
+                    {<p key={data[1].id}>{data[1].name}</p>}
+                    {/*{data.map(item => <h4 key={item.id}>{item.name}</h4>)}*/}
+                </div>
             </div>
-        </div>
+        )
     }
 }
-Card.defaultProps = {
-    title:null,
-    text:null
-}
+
 export default Card
