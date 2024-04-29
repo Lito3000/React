@@ -4,8 +4,8 @@ import Card from "./Components/Card.jsx";
 
 function App() {
     const items = [
-        {id: 1, name: 'hi'},
-        {id: 2, name: 'how are you?'}
+        {id: 1, title: 'hi'},
+        {id: 2, text: 'how are you?'}
     ]
 
     return (
