@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import viteLogo from '/vite.svg'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Progress from "./components/Progress.jsx";
 
 
 function App() {
@@ -18,9 +19,7 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+          <Progress percentage={40} />
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
