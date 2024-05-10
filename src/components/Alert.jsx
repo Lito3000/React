@@ -3,6 +3,7 @@ import {Component} from "react";
 class Alert extends Component{
 
     render() {
+
         const {text,type} = this.props;
 
         return (
