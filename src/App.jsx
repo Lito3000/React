@@ -3,11 +3,18 @@ import viteLogo from '/vite.svg'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 
+import Carousel from './components/Carousel.jsx'
+import nature1 from '../assets/nature1.jpg'
+import nature2 from '../assets/nature2.jpg'
+import nature3 from '../assets/nature3.jpg'
+import nature4 from '../assets/nature4.jpg'
+
 function App() {
   const [count, setCount] = useState(0)
-
+const image = [nature1,nature2,nature3,nature4]
   return (
     <>
+        <Carousel  images = {image}/>
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
