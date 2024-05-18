@@ -1,38 +1,36 @@
-import {Component} from "react";
+import {Component} from 'react'
 import cn from 'classnames'
 import cloneDp from 'lodash'
-import nature1 from '/nature1.jpg'
-import nature2 from '/nature2.jpg'
-import nature3 from '/nature3.jpg'
-import nature4 from '/nature4.jpg'
 
 class Carousel extends Component {
 
+
     constructor(props) {
         super(props);
+        const {0: l, 1: k, 2: j, 3: s} = this.props.item
         this.state = {
             images: [
                 {
                     id: 1,
-                    url: nature1,
+                    url: l,
                     alt: '1',
                     active: true
                 },
                 {
                     id: 2,
-                    url: nature2,
+                    url: k,
                     alt: '2',
                     active: false
                 },
                 {
                     id: 3,
-                    url: nature3,
+                    url: j,
                     alt: '3',
                     active: false
                 },
                 {
                     id: 4,
-                    url: nature4,
+                    url: s,
                     alt: '4',
                     active: false
                 },
@@ -40,33 +38,50 @@ class Carousel extends Component {
         }
     }
 
-    handlePrev() {
+    handlePrev = () => {
         const oldState = cloneDp.cloneDeep(this.state)
-        const activeElementIndex = oldState.findIndex((item) => item.active)
-        oldState[activeElementIndex].active = false
-        oldState[activeElementIndex - 1].active = true
+        const activeElementIndex = oldState.images.findIndex((item) => item.active)
+        oldState.images[activeElementIndex].active = false
+        if (activeElementIndex === 0) {
+            oldState.images[3].active = true
+            this.setState(oldState)
+            this.render()
+        } else {
+            oldState.images[activeElementIndex - 1].active = true
+            this.setState(oldState)
+            this.render()
+        }
     }
 
-    handleNext() {
+    handleNext = () => {
         const oldState = cloneDp.cloneDeep(this.state)
-        const activeElementIndex = oldState.findIndex((item) => item.active)
-        oldState[activeElementIndex].active = false
-        oldState[activeElementIndex + 1].active = true
+        const activeElementIndex = oldState.images.findIndex((item) => item.active)
+        oldState.images[activeElementIndex].active = false
+        if (activeElementIndex !== 3) {
+            oldState.images[activeElementIndex + 1].active = true
+            this.setState(oldState)
+            this.render()
+        } else {
+            oldState.images[0].active = true
+            this.setState(oldState)
+            this.render()
+        }
     }
 
     render() {
-
+        const {images} = this.state
         return (
             <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel">
                 <div className="carousel-inner">
-                    {this.state.map((item) => {
+                    {images.map((item) => {
                             const cnClass = cn({
                                 'carousel-item': true,
                                 'active': item.active
+
                             })
                             return (
-                                <div className="carousel-item active">
-                                    <img src={item.url} className={cnClass} alt={item.alt}/>
+                                <div className={cnClass} key={item.id}>
+                                    <img src={item.url} className="d-block w-100" alt={item.alt}/>
                                 </div>
                             )
                         }
