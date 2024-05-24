@@ -43,7 +43,7 @@ class Carousel extends Component {
         const activeElementIndex = oldState.images.findIndex((item) => item.active)
         oldState.images[activeElementIndex].active = false
         if (activeElementIndex === 0) {
-            oldState.images[3].active = true
+            oldState.images[oldState.images.at(-1).id - 1].active = true
             this.setState(oldState)
             this.render()
         } else {
@@ -62,7 +62,7 @@ class Carousel extends Component {
             this.setState(oldState)
             this.render()
         } else {
-            oldState.images[0].active = true
+            oldState.images[oldState.images.at(0).id - 1].active = true
             this.setState(oldState)
             this.render()
         }
