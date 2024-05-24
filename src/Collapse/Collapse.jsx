@@ -3,7 +3,10 @@ import {Component} from "react";
 class Collapse extends Component {
     constructor(props) {
         super(props);
-        this.state = {isShown: false}
+        this.state = {
+            isShown: this.props.opened,
+            text: this.props.text
+        }
     }
 
     toggleText = () => {
@@ -22,7 +25,7 @@ class Collapse extends Component {
                 </p>
                 <div className={isShown ? 'collapse' : 'collapse show'}>
                     <div className="card card-body">
-                        collapse me
+                        {this.state.text}
                     </div>
                 </div>
             </div>
