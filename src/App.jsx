@@ -2,12 +2,14 @@ import { useState } from 'react'
 import viteLogo from '/vite.svg'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
+import EventLog from "./Component/EventLog.jsx";
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
+        <EventLog/>
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
