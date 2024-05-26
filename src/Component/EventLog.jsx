@@ -1,13 +1,23 @@
 import React from "react";
 
 class EventLog extends React.Component {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            isShown: this.props.opened,
+            text: this.props.text
+        }
+    }
+    toggleText = () => {
+        const {isShown} = this.state;
+        this.setState({isShown: !isShown})
+    }
     render() {
 
         return (
             <div>
                 <div className="btn-group font-monospace" role="group">
-                    <button type="button" className="btn btn-outline-success">+</button>
+                    <button type="button" onClick={this.toggleText} className="btn btn-outline-success">+</button>
                     <button type="button" className="btn btn-outline-danger">-</button>
                 </div>
                 <div className="list-group">
