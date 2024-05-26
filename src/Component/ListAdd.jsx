@@ -8,13 +8,26 @@ class ListAdd extends React.Component {
         const count2 = []
         this.state = {count2}
     }
-    buttonAddManus = (mic) => () => {
+
+    removeItem = (id) => (e) => {
+        e.preventDefault();
+        const oldState = _.cloneDeep(this.state)
+        const newItems = oldState.count2.filter(function (item) {
+            if (item.map1 !== id) {
+                return item
+            }
+        });
+        console.log(newItems)
+        this.setState({count2: newItems});
+    };
+
+    buttonAddManus = (mic) => (e) => {
         const oldState = _.cloneDeep(this.state)
         if (oldState.count2.length === 0) {
             return
         }
         const newItems = oldState.count2.filter(function (item, i) {
-            if (mic.length - 1 !== mic[i].map1 - 1) {
+            if (mic.length - 1 !== i) {
                 return item
             }
         });
@@ -38,7 +51,6 @@ class ListAdd extends React.Component {
             }, {});
 
             let third = oldState.count2.concat(newIte);
-
             this.setState({count2: third})
         }
     }
@@ -52,13 +64,12 @@ class ListAdd extends React.Component {
                 </button>
             </div>
             {this.state.count2.map((item) => <div key={item.map1} className="list-group">
-                    <button type="button" key={item.map1}
+                    <button type="button" onClick={this.removeItem(item.map1)} key={item.map1}
                             className="list-group-item list-group-item-action">{item.map1}</button>
                 </div>
             )}
         </ul>);
     }
-
 }
 
 export default ListAdd;
