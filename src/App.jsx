@@ -56,9 +56,10 @@ function App() {
             </div>
             <h1>Vite + React</h1>
             <div className="card">
-                <button onClick={() => (func(numb => numb + 1))}>jog</button>
+                {/*<button onClick={() => setCount((count) => count + 1)}>*/}
+                    <button onClick={( ) => func(numb => numb + 1)}>{numb}</button>
                     <button onClick={addButton}>
-                        count is {numb}
+                        count is {count}
                     </button>
                     <p>
                         Edit <code>src/App.jsx</code> and save to test HMR
