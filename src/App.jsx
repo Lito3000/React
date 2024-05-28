@@ -8,14 +8,15 @@ function App() {
     const [count, setCount] = useState(0)
     console.log(useState(6))
     console.log(useState)
-    console.dir(useState())
+    console.dir(useState(0))
+    console.dir([count, setCount])
     console.dir(useState)
     console.log(setCount)
     console.dir(count)
     console.dir(setCount)
     console.log(count)
     console.log([count, setCount])
-    console.dir([count, setCount])
+
 const addButton = ()=>{
    // const [h,jk] =  setCount((cou) => cou + 1)//это параметры которые туда уходят
    //  console.log(h)
