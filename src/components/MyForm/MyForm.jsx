@@ -1,17 +1,21 @@
 import React, {Component} from 'react';
 import {cloneDeep} from 'lodash'
 import {Button, Form} from "react-bootstrap";
+import Input from "../UI/Input";
+
+
+const formInitialValue = {
+    email: '',
+    password: '',
+    address: ''
+}
 
 class MyForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            formData: {
-                email: '',
-                password: ''
-            }
+            formData: {...formInitialValue}
         }
-
     }
 
 
@@ -21,31 +25,27 @@ class MyForm extends Component {
         // console.log(ev.target)
         // console.log(ev.target.name)
         console.log(this.state.formData.email)
-        this.setState({formData:previousState})
+        this.setState({formData: previousState})
     }
 
-    handleSabmit=(event)=>{
+    handleSubmit = (event) => {
         event.preventDefault()
+        console.log(this.state.formData)
+        this.setState({formData: {...formInitialValue}})
     }
 
     render() {
-        const {email,password} = this.state.formData
+        const {email, password, address} = this.state.formData
         return (
-            <Form>
+            <Form onSubmit={this.handleSubmit}>
                 <h1 className='text-center'>Form</h1>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control
-                        name='email'
-                        type="email"
-                        placeholder="Enter email"
-                        value={email}
-                        onChange={this.handleChange}
-                    />
-                    <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                    </Form.Text>
-                </Form.Group>
+                <Input
+                    label='Email address'
+                    name='email'
+                    onchange={this.handleChange}
+                    value={email}
+                    type='email'
+                />
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
@@ -54,12 +54,28 @@ class MyForm extends Component {
                         placeholder="Enter password"
                         value={password}
                         onChange={this.handleChange}
+                        autoComplete="off"
                     />
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
                     </Form.Text>
                 </Form.Group>
-                <Button type = 'submit' onClick={this.handleSabmit}>Submit</Button>
+                <Form.Group className="mb-3" controlId="formBasicAddress">
+                    <Form.Label>Address</Form.Label>
+                    <Form.Control
+                        as='textarea'
+                        name='address'
+                        type="address"
+                        placeholder="Enter address"
+                        value={address}
+                        onChange={this.handleChange}
+                        autoComplete="off"
+                    />
+                    <Form.Text className="text-muted">
+                        We'll never share your email with anyone else.
+                    </Form.Text>
+                </Form.Group>
+                <Button type='submit'>Submit</Button>
             </Form>
         );
     }
