@@ -17,13 +17,35 @@ function App() {
     console.log(count)
     console.log([count, setCount])
 
-const addButton = ()=>{
-   // const [h,jk] =  setCount((cou) => cou + 1)//это параметры которые туда уходят
-   //  console.log(h)
-    console.log(setCount)
+    const addButton = () => {
+
         return setCount(cou => cou + 1)
     }
 
+    const div = (p) => {
+
+        return [p,(value) =>{
+          p = value(p)
+            return value(p)
+        }]
+    }
+    const [numb,func] = div(6)
+
+    const ggf = () => {
+        return func(numb  => numb + 1)
+
+    }
+    console.log(div(1));
+    console.log([numb,func])
+    console.log(ggf());
+    console.log(ggf());
+    const func5 = (map) => {
+        return map(2)
+    }
+    const ggf5 = () => {
+        return func5(cou  => cou + 1)
+    }
+    console.log(ggf5());
     return (
         <>
             {/*<TodoBox/>*/}
@@ -34,15 +56,16 @@ const addButton = ()=>{
             </div>
             <h1>Vite + React</h1>
             <div className="card">
-                <button onClick={addButton}>
-                    count is {count}
-                </button>
-                <p>
-                    Edit <code>src/App.jsx</code> and save to test HMR
-                </p>
+                <button onClick={() => (func(numb => numb + 1))}>jog</button>
+                    <button onClick={addButton}>
+                        count is {numb}
+                    </button>
+                    <p>
+                        Edit <code>src/App.jsx</code> and save to test HMR
+                    </p>
             </div>
         </>
-    )
+)
 }
 
 export default App
