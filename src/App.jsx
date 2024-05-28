@@ -22,8 +22,7 @@ const addButton = ()=>{
     console.log(setCount)
         return setCount(cou => cou + 1)
     }
-    useState()
-    setState()
+
     return (
         <>
             {/*<TodoBox/>*/}
