@@ -65,7 +65,7 @@ class MyForm extends Component {
     }
 
     render() {
-        const {email, password, address, city, country, rules} = this.state.formData
+        const {email, password, address, city, country} = this.state.formData
         return (
             <Form onSubmit={this.handleSubmit}>
                 <h1 className='text-center'>Form</h1>
