@@ -19,7 +19,12 @@ class MyForm extends Component {
         super(props);
         this.state = {
             formData:
-                {...formInitialValue}
+                {...formInitialValue},
+            gits:(g)=>{
+              return  g.map(imp =>{
+                   return  imp + 2
+                })
+            }
         }
         // this.fields = [
         //     {
@@ -54,16 +59,19 @@ class MyForm extends Component {
         }
         // console.log(ev.target)
         // console.log(ev.target.name)
-        console.log(this.state.formData.email)
+        console.log(this.state.gits)
         this.setState({formData: previousState})
     }
 
     handleSubmit = (event) => {
-        console.log(this.state.formData)
+        console.log(this.state.gits)
+        const k = [4,5,3]
+        const sumNumb = this.state.gits(k)
+        console.log(sumNumb)
         const g = this.props.onSubmit
         const [data] = g({7: 'u'})
         console.log(data)
-        const k = [6, 8, 5]
+
         const b = k.map
         const f = b((iy) => ({iy}))
         console.log(f)
