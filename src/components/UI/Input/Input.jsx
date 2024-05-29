@@ -1,7 +1,5 @@
-import React from 'react';
 import {Form} from "react-bootstrap";
 import {random} from "lodash";
-import input from "./index.js";
 import PropTypes from "prop-types";
 
 const Input = ({name,type,placeholder,value,onchange,label}) => {

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import {cloneDeep} from 'lodash'
 import {Button, Form} from "react-bootstrap";
 import Input from "../UI/Input";
@@ -39,6 +39,20 @@ class MyForm extends Component {
         return (
             <Form onSubmit={this.handleSubmit}>
                 <h1 className='text-center'>Form</h1>
+                <Input
+                    label='Email address'
+                    name='email'
+                    onchange={this.handleChange}
+                    value={email}
+                    type='email'
+                />
+                <Input
+                    label='Email address'
+                    name='email'
+                    onchange={this.handleChange}
+                    value={email}
+                    type='email'
+                />
                 <Input
                     label='Email address'
                     name='email'
