@@ -2,26 +2,56 @@ import {Component} from 'react';
 import {cloneDeep} from 'lodash'
 import {Button, Form} from "react-bootstrap";
 import Input from "../UI/Input";
+import PropTypes from "prop-types";
 
 
 const formInitialValue = {
     email: '',
     password: '',
-    address: ''
+    address: '',
+    city: '',
+    country: '',
+    rules: 'off'
 }
 
 class MyForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            formData: {...formInitialValue}
+            formData:
+                {...formInitialValue}
         }
+        // this.fields = [
+        //     {
+        //         label: 'Email address',
+        //         name: 'email',
+        //         type: 'email'
+        //     },
+        //     {
+        //         label: 'Password',
+        //         name: 'password',
+        //         type: 'password'
+        //     },
+        //     {
+        //         label: 'Address',
+        //         name: 'address',
+        //         type: 'text'
+        //     },
+        // ]
     }
 
 
     handleChange = (event) => {
         const previousState = cloneDeep(this.state.formData)
-        previousState[event.target.name] = event.target.value
+        if (event.target.name === 'rules') {
+            if (previousState[event.target.name] === 'on') {
+                previousState[event.target.name] = 'off'
+            } else {
+                previousState[event.target.name] = 'on'
+            }
+        } else {
+            previousState[event.target.name] = event.target.value
+        }
         // console.log(ev.target)
         // console.log(ev.target.name)
         console.log(this.state.formData.email)
@@ -30,15 +60,27 @@ class MyForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
-        console.log(this.state.formData)
+        this.props.onSubmit(this.state.formData)
         this.setState({formData: {...formInitialValue}})
     }
 
     render() {
-        const {email, password, address} = this.state.formData
+        const {email, password, address, city, country, rules} = this.state.formData
         return (
             <Form onSubmit={this.handleSubmit}>
                 <h1 className='text-center'>Form</h1>
+                {/*                {this.fields.map(input=>{*/}
+                {/*                    const value = this.state.formData[input.name]*/}
+                {/*                    console.log(value)*/}
+                {/*return <Input*/}
+                {/*    key={random(0,100)}*/}
+                {/*                        label={input.label}*/}
+                {/*                        name={input.name}*/}
+                {/*                        onchange={this.handleChange}*/}
+                {/*                        value={this.state.formData[input.name]}*/}
+                {/*                        type={input.type}*/}
+                {/*                    />*/}
+                {/*                })}*/}
                 <Input
                     label='Email address'
                     name='email'
@@ -47,52 +89,49 @@ class MyForm extends Component {
                     type='email'
                 />
                 <Input
-                    label='Email address'
-                    name='email'
+                    label='Password'
+                    name='password'
                     onchange={this.handleChange}
-                    value={email}
-                    type='email'
+                    value={password}
+                    type='password'
                 />
                 <Input
-                    label='Email address'
-                    name='email'
+                    label='Address'
+                    name='address'
                     onchange={this.handleChange}
-                    value={email}
-                    type='email'
+                    value={address}
+                    as='textarea'
                 />
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        name='password'
-                        type="password"
-                        placeholder="Enter password"
-                        value={password}
-                        onChange={this.handleChange}
-                        autoComplete="off"
-                    />
-                    <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                    </Form.Text>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicAddress">
-                    <Form.Label>Address</Form.Label>
-                    <Form.Control
-                        as='textarea'
-                        name='address'
-                        type="address"
-                        placeholder="Enter address"
-                        value={address}
-                        onChange={this.handleChange}
-                        autoComplete="off"
-                    />
-                    <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                    </Form.Text>
-                </Form.Group>
+                <Input
+                    label='City'
+                    name='city'
+                    onchange={this.handleChange}
+                    value={city}
+                />
+                <Form.Select className="mb-3"
+                             aria-label="Default select example"
+                             name='country'
+                             onChange={this.handleChange}
+                             value={country}
+                >
+                    <option>Open this select menu</option>
+                    <option value="argentina">Argentina</option>
+                    <option value="ukraine">Ukraine</option>
+                    <option value="china">China</option>
+                </Form.Select>
+                <Form.Check
+                    type="switch"
+                    id="custom-switch"
+                    label="Check this switch"
+                    name='rules'
+                    onClick={this.handleChange}
+                />
                 <Button type='submit'>Submit</Button>
             </Form>
         );
     }
 }
-
+MyForm.propTypes = {
+    onSubmit:PropTypes.func.isRequired
+}
 export default MyForm
