@@ -14,11 +14,13 @@ class App extends React.Component {
     }
 
     onSubmitHandler = (formData) => {
-        const formDataCopy = cloneDeep(formData)//здесь без const onSubmitHandler является переменной для MyForm onSubmit
-        console.log(formDataCopy)//onSubmit здесь ключ:(formData) => {} ,(formData) => {}значение
-        //                                    {onSubmit:(formData) => {}}
+        const formDataCopy = cloneDeep(formData)
+        console.log(formDataCopy)
+
         this.setState({data: formDataCopy})
-        return [this.state]//onSubmit={this.onSubmitHandler} === this.props.onSubmit(formData)
+        console.log(this.state)
+        console.log(this)
+        return [this.state]
     }
 
     render() {

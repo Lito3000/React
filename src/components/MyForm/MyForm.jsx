@@ -59,6 +59,14 @@ class MyForm extends Component {
     }
 
     handleSubmit = (event) => {
+        console.log(this.state.formData)
+        const g = this.props.onSubmit
+        const [data] = g({7: 'u'})
+        console.log(data)
+        const k = [6, 8, 5]
+        const b = k.map
+        const f = b((iy) => ({iy}))
+        console.log(f)
         event.preventDefault()
         this.props.onSubmit(this.state.formData)
         this.setState({formData: {...formInitialValue}})
@@ -131,7 +139,8 @@ class MyForm extends Component {
         );
     }
 }
+
 MyForm.propTypes = {
-    onSubmit:PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired
 }
 export default MyForm
