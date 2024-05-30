@@ -4,29 +4,34 @@ import './App.css'
 import MyForm from "./components/MyForm";
 import {Container} from "react-bootstrap";
 import {cloneDeep} from "lodash";
+import DataTable from "./components/DataTable"
+
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: null
+            data: null,
+            UIShowTable: false
         }
     }
 
     onSubmitHandler = (formData) => {
         const formDataCopy = cloneDeep(formData)
-        console.log(formDataCopy)
+        this.setState({data: formDataCopy, UIShowTable: true})
 
-        this.setState({data: formDataCopy})
-        console.log(this.state)
         console.log(this)
-        return [this.state]
+    }
+    handleClick = (e) => {
+        console.log(e)
+        this.setState({UIShowTable: false})
     }
 
     render() {
         return (
             <Container>
-                <MyForm onSubmit={this.onSubmitHandler}/>
+                {!this.state.UIShowTable && <MyForm onSubmit={this.onSubmitHandler} formData={this.state.data}/>}
+                {this.state.UIShowTable && <DataTable tableData={this.state.data} onClickBack={this.handleClick}/>}
             </Container>
         )
     }

@@ -5,6 +5,7 @@ import Input from "../UI/Input";
 import PropTypes from "prop-types";
 
 
+
 const formInitialValue = {
     email: '',
     password: '',
@@ -18,33 +19,9 @@ class MyForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            formData:
-                {...formInitialValue},
-            gits:(g)=>{
-              return  g.map(imp =>{
-                   return  imp + 2
-                })
-            }
+            formData: props.formData ? {...props.formData} : {...formInitialValue},
         }
-        // this.fields = [
-        //     {
-        //         label: 'Email address',
-        //         name: 'email',
-        //         type: 'email'
-        //     },
-        //     {
-        //         label: 'Password',
-        //         name: 'password',
-        //         type: 'password'
-        //     },
-        //     {
-        //         label: 'Address',
-        //         name: 'address',
-        //         type: 'text'
-        //     },
-        // ]
     }
-
 
     handleChange = (event) => {
         const previousState = cloneDeep(this.state.formData)
@@ -57,46 +34,20 @@ class MyForm extends Component {
         } else {
             previousState[event.target.name] = event.target.value
         }
-        // console.log(ev.target)
-        // console.log(ev.target.name)
-        console.log(this.state.gits)
         this.setState({formData: previousState})
     }
 
     handleSubmit = (event) => {
-        console.log(this.state.gits)
-        const k = [4,5,3]
-        const sumNumb = this.state.gits(k)
-        console.log(sumNumb)
-        const g = this.props.onSubmit
-        const [data] = g({7: 'u'})
-        console.log(data)
-
-        const b = k.map
-        const f = b((iy) => ({iy}))
-        console.log(f)
         event.preventDefault()
         this.props.onSubmit(this.state.formData)
         this.setState({formData: {...formInitialValue}})
     }
 
     render() {
-        const {email, password, address, city, country} = this.state.formData
+        const {email, password, address, city, country, rules} = this.state.formData
         return (
             <Form onSubmit={this.handleSubmit}>
                 <h1 className='text-center'>Form</h1>
-                {/*                {this.fields.map(input=>{*/}
-                {/*                    const value = this.state.formData[input.name]*/}
-                {/*                    console.log(value)*/}
-                {/*return <Input*/}
-                {/*    key={random(0,100)}*/}
-                {/*                        label={input.label}*/}
-                {/*                        name={input.name}*/}
-                {/*                        onchange={this.handleChange}*/}
-                {/*                        value={this.state.formData[input.name]}*/}
-                {/*                        type={input.type}*/}
-                {/*                    />*/}
-                {/*                })}*/}
                 <Input
                     label='Email address'
                     name='email'
@@ -138,9 +89,10 @@ class MyForm extends Component {
                 <Form.Check
                     type="switch"
                     id="custom-switch"
+                    value={rules}
                     label="Check this switch"
                     name='rules'
-                    onClick={this.handleChange}
+                    onChange={this.handleChange}
                 />
                 <Button type='submit'>Submit</Button>
             </Form>
@@ -149,6 +101,7 @@ class MyForm extends Component {
 }
 
 MyForm.propTypes = {
-    onSubmit: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired,
+    formData: PropTypes.object
 }
 export default MyForm
