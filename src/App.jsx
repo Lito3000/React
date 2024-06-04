@@ -5,13 +5,16 @@ import './App.css'
 import State from "./state/state.jsx";
 import ListAdd from "./components/ListAdd.jsx";
 import TodoBox from "./components/TodoBox.jsx";
-
+import OtherFiles from "./Otherfiles/OtherFiles.jsx";
+import OtherFiles2 from "./Otherfiles/OtherFiles2.jsx";
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
+        <OtherFiles2/>
+        <OtherFiles/>
         <TodoBox/>
         <ListAdd/>
         <State/>
