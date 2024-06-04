@@ -7,12 +7,14 @@ import ListAdd from "./components/ListAdd.jsx";
 import TodoBox from "./components/TodoBox.jsx";
 import OtherFiles from "./Otherfiles/OtherFiles.jsx";
 import OtherFiles2 from "./Otherfiles/OtherFiles2.jsx";
+import AutoselectingInput from "./components/TodoBox.jsx";
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
+        <AutoselectingInput/>
         <OtherFiles2/>
         <OtherFiles/>
         <TodoBox/>

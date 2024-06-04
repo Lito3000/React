@@ -39,13 +39,13 @@ class OtherFiles2 extends Component {
         return (
             <Form onSubmit={this.handleSubmit}>
                 <h1 className='text-center'>Form</h1>
-                {/*<Input*/}
-                {/*    label='Email address'*/}
-                {/*    name='email'*/}
-                {/*    onchange={this.handleChange}*/}
-                {/*    value={email}*/}
-                {/*    type='email'*/}
-                {/*/>*/}
+                <Input
+                    label='Email address'
+                    name='email'
+                    onchange={this.handleChange}
+                    value={email}
+                    type='email'
+                />
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control

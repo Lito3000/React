@@ -9,7 +9,7 @@ class OtherFiles extends Component {
             formData: {
                 email: '',
                 password: '',
-                address:''
+                ToDoList:''
             }
         }
 
@@ -30,18 +30,18 @@ class OtherFiles extends Component {
     }
 
     render() {
-        const {address} = this.state.formData
+        const {ToDoList} = this.state.formData
         return (
             <Form>
                 <h1 className='text-center'>ToDoList</h1>
                 <Form.Group className="mb-3" controlId="formBasicAddress">
-                    <Form.Label>Address</Form.Label>
+                    <Form.Label>ToDoList</Form.Label>
                     <Form.Control
                         as='textarea'
-                        name='address'
-                        type="address"
-                        placeholder="Enter address"
-                        value={address}
+                        name='ToDoList'
+                        type="ToDoList"
+                        placeholder="Enter text"
+                        value={ToDoList}
                         onChange={this.handleChange}
                         autoComplete="off"
                     />

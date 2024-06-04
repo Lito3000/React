@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 
 
 class TodoBox extends Component {
@@ -8,7 +8,10 @@ class TodoBox extends Component {
                 <div className="mb-3">
                     <form className="d-flex">
                         <div className="me-3">
-                            <input type="text" value="" required="" className="form-control"
+                            <input type="text"
+                                   value=""
+                                   required=""
+                                   className="form-control"
                                    placeholder="I am going..."/>
                         </div>
                         <button type="submit" className="btn btn-primary">add</button>
@@ -38,3 +41,19 @@ class TodoBox extends Component {
 }
 
 export default TodoBox
+//----------------------------------------------------------------------------------------------------------
+// import { Component } from 'react';
+// import { findDOMNode } from 'react-dom';
+//
+// class AutoselectingInput extends Component {
+//     componentDidMount() {
+//         const input = findDOMNode(this);
+//         input.select()
+//     }
+//
+//     render() {
+//         return <input/>
+//     }
+// }
+//
+// export default AutoselectingInput;
