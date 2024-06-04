@@ -3,12 +3,17 @@ import viteLogo from '/vite.svg'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import State from "./state/state.jsx";
+import ListAdd from "./components/ListAdd.jsx";
+import TodoBox from "./components/TodoBox.jsx";
+
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
+        <TodoBox/>
+        <ListAdd/>
         <State/>
 
       <div>
