@@ -85,7 +85,7 @@ class ListAdd extends React.Component {
             // const fid = (map) => ([{map: map[0].map + 1}])
             // const y = fid(id);
             // console.log(y)
-
+            console.log(third)
             this.setState({count2: third})
         }
     }
@@ -131,6 +131,7 @@ class ListAdd extends React.Component {
     // }
 
     render() {//.1 render() //.2 renderItem(item)
+        console.log(this.state)
         // console.log([1, 2, 3, 4, 5].map((i) => ({id: i})).map(function (item) {
         //      // return <li key={item.id}><a href="#" >{item.id}</a></li>;
         //     return item.id + 5
