@@ -23,13 +23,16 @@ class TodoBox extends Component {
     handleSabmit = () => (event) => {
         event.preventDefault()
         const oldState = _.cloneDeep(this.state)
-        let yu = []
-        yu.push({saveData: oldState.formData.TodoBox})
-        let third = oldState.formData.saveData.concat(yu);
+        let arrComponent = []
+        arrComponent.push({
+            saveData: oldState.formData.TodoBox,
+            idData: uniqueId('iddName')
+        })
+        let third = oldState.formData.saveData.concat(arrComponent);
         this.setState({
             formData: {
                 TodoBox: '',
-                saveData: third
+                saveData: third,
             },
         })
     }
@@ -37,7 +40,7 @@ class TodoBox extends Component {
         e.preventDefault();
         const oldState = _.cloneDeep(this.state.formData)
         const newItems = oldState.saveData.filter(function (item) {
-            if (item.saveData !== id) {
+            if (item.idData !== id) {
                 return item
             }
         });
@@ -50,10 +53,10 @@ class TodoBox extends Component {
         });
     };
     renderFunction = (item) => {
-        return <div key={item.saveData + uniqueId('idd')} className="row">
+        return <div key={item.saveData + uniqueId('iddDiv')} className="row">
             <div className="col-auto">
                 <button type="button"
-                        onClick={this.removeItem(item.saveData)}
+                        onClick={this.removeItem(item.idData)}
                         className="btn btn-primary btn-sm">-
                 </button>
             </div>
