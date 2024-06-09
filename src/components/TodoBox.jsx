@@ -1,4 +1,4 @@
-import  {Component} from 'react';
+import {Component} from 'react';
 import _, {cloneDeep} from 'lodash';
 // import {random} from "lodash";
 import {uniqueId} from 'lodash'
@@ -24,7 +24,7 @@ class TodoBox extends Component {
         event.preventDefault()
         const oldState = _.cloneDeep(this.state)
         let yu = []
-        yu.push({saveData:oldState.formData.TodoBox})
+        yu.push({saveData: oldState.formData.TodoBox})
         let third = oldState.formData.saveData.concat(yu);
         this.setState({
             formData: {
@@ -42,11 +42,26 @@ class TodoBox extends Component {
             }
         });
         console.log(newItems)
-        this.setState({formData: {
+        this.setState({
+            formData: {
                 TodoBox: '',
                 saveData: newItems
-            }});
+            }
+        });
     };
+    renderFunction = (item) => {
+        return <div key={item.saveData + uniqueId('idd')} className="row">
+            <div className="col-auto">
+                <button type="button"
+                        onClick={this.removeItem(item.saveData)}
+                        className="btn btn-primary btn-sm">-
+                </button>
+            </div>
+            <div className="col">{item.saveData}</div>
+            <hr/>
+        </div>
+    }
+
     render() {
         const {TodoBox} = this.state.formData
         return (
@@ -68,16 +83,7 @@ class TodoBox extends Component {
                         </button>
                     </form>
                 </div>
-                {this.state.formData.saveData.map((item) => <div key={item.saveData + uniqueId('idd')} className="row">
-                        <div className="col-auto">
-                            <button type="button"
-                                    onClick={this.removeItem(item.saveData)}
-                                    className="btn btn-primary btn-sm">-</button>
-                        </div>
-                        <div className="col">{item.saveData}</div>
-                        <hr/>
-                    </div>
-                )}
+                {this.state.formData.saveData.map(item => this.renderFunction(item))}
             </div>
         );
     }
