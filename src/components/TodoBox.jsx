@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
+import  {Component} from 'react';
 import _, {cloneDeep} from 'lodash';
-import {random} from "lodash";
+// import {random} from "lodash";
+import {uniqueId} from 'lodash'
 
 class TodoBox extends Component {
     constructor(props) {
@@ -47,7 +48,6 @@ class TodoBox extends Component {
             }});
     };
     render() {
-
         const {TodoBox} = this.state.formData
         return (
             <div>
@@ -68,7 +68,7 @@ class TodoBox extends Component {
                         </button>
                     </form>
                 </div>
-                {this.state.formData.saveData.map((item) => <div key={item.saveData + random(0,100)} className="row">
+                {this.state.formData.saveData.map((item) => <div key={item.saveData + uniqueId('idd')} className="row">
                         <div className="col-auto">
                             <button type="button"
                                     onClick={this.removeItem(item.saveData)}
