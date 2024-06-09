@@ -1,6 +1,5 @@
 import {Component} from 'react';
 import _, {cloneDeep} from 'lodash';
-// import {random} from "lodash";
 import {uniqueId} from 'lodash'
 
 class TodoBox extends Component {
