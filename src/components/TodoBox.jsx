@@ -43,7 +43,7 @@ class TodoBox extends Component {
                 return item
             }
         });
-        console.log(newItems)
+
         this.setState({
             formData: {
                 TodoBox: '',
