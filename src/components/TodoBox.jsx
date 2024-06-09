@@ -14,6 +14,7 @@ class TodoBox extends Component {
     }
 
     handleChange = (event) => {
+        console.log(this.state.formData.saveData.idData)
         const previousState = cloneDeep(this.state.formData)
         previousState[event.target.name] = event.target.value
         this.setState({formData: previousState})
@@ -71,13 +72,14 @@ class TodoBox extends Component {
                 <div className="mb-3">
                     <form className="d-flex">
                         <div className="me-3">
-                            <input type="text"
-                                   name='TodoBox'
-                                   value={TodoBox}
-                                   required=""
-                                   className="form-control"
-                                   placeholder="I am going..."
-                                   onChange={this.handleChange}
+                            <input
+                                type="text"
+                                name='TodoBox'
+                                value={TodoBox}
+                                required=""
+                                className="form-control"
+                                placeholder="I am going..."
+                                onChange={this.handleChange}
                             />
                         </div>
                         <button type="submit" onClick={this.handleSabmit()}
