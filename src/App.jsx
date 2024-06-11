@@ -1,8 +1,8 @@
-// eslint-disable-next-line no-unused-vars
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import Modal from "./components/Modal.jsx";
+import {ModalTitle} from "react-bootstrap";
 
 
 function App() {
@@ -10,7 +10,9 @@ function App() {
         <Modal>
             <Modal.Dialog>
                 <Modal.Content>
-                    <Modal.Header>Modal title</Modal.Header>
+                    <Modal.Header>
+                        <Modal.Title>Modal title</Modal.Title>
+                    </Modal.Header>
                     <Modal.Body>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit
                     </Modal.Body>
