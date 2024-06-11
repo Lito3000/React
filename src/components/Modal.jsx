@@ -27,9 +27,7 @@ class Modal extends React.Component {
     render() {
         return <div>
             <button type="button" className="modal-open-button btn btn-danger" onClick={this.toggle}>Open</button>
-            <Modal.Dialog>
-
-            </Modal.Dialog>
+            <Modal.Dialog></Modal.Dialog>
         </div>
     }
 }
