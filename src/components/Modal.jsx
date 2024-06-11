@@ -5,6 +5,7 @@ import Content from './Content.jsx'
 import Dialog from './Dialog.jsx'
 import Title from "./Title.jsx";
 import React from "react";
+import style from "classnames";
 
 
 class Modal extends React.Component {
@@ -15,7 +16,7 @@ class Modal extends React.Component {
     static Footer = Footer;
     static Content = Content;
     static Dialog = Dialog;
-    static Title=Title;
+    static Title = Title;
 
     toggle = (e) => {
         this.setState({
@@ -25,9 +26,16 @@ class Modal extends React.Component {
 
 
     render() {
+        const styleClass = style([
+            this.state.modal ? 'display: none' : 'display: block'
+        ]);
         return <div>
             <button type="button" className="modal-open-button btn btn-danger" onClick={this.toggle}>Open</button>
-            <Modal.Dialog></Modal.Dialog>
+            <div className="modal" style={styleClass}>
+                <Modal.Dialog>
+
+                </Modal.Dialog>
+            </div>
         </div>
     }
 }
