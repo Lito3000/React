@@ -1,43 +1,36 @@
-import Header from './Header.jsx'
-import Body from "./Body.jsx";
+import HeaderModal from './Header.jsx'
+import BodyModal from "./Body.jsx";
 import Footer from './Footer.jsx'
-import Content from './Content.jsx'
-import Dialog from './Dialog.jsx'
-import Title from "./Title.jsx";
+import ContentModal from './Content.jsx'
+import DialogModal from './Dialog.jsx'
+import TitleModal from "./Title.jsx"
+import PropTypes from "prop-types";
 import React from "react";
-import style from "classnames";
 
 
 class Modal extends React.Component {
-    state = {modal: false};
-
-    static Header = Header;
-    static Body = Body;
+    static Header = HeaderModal;
+    static Body = BodyModal;
     static Footer = Footer;
-    static Content = Content;
-    static Dialog = Dialog;
-    static Title = Title;
-
-    toggle = (e) => {
-        this.setState({
-            modal: !this.state.modal,
-        });
-    }
+    static Content = ContentModal;
+    static Dialog = DialogModal;
+    static Title = TitleModal;
 
 
     render() {
-        const styleClass = style([
-            this.state.modal ? 'display: none' : 'display: block'
-        ]);
-        return <div>
-            <button type="button" className="modal-open-button btn btn-danger" onClick={this.toggle}>Open</button>
-            <div className="modal" style={styleClass}>
-                <Modal.Dialog>
+        const {isOpen, children} = this.props
 
-                </Modal.Dialog>
+        return (
+            <div className={`modal ${isOpen ? 'fade show' : ''}`} style={{display: isOpen ? 'block' : 'none'}}
+                 role='dialog'>
+                {children}
             </div>
-        </div>
+        )
     }
 }
 
+Modal.propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    children: PropTypes.node.isRequired
+}
 export default Modal
