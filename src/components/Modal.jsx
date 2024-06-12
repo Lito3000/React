@@ -5,6 +5,7 @@ import ContentModal from './Content.jsx'
 import DialogModal from './Dialog.jsx'
 import TitleModal from "./Title.jsx"
 import PropTypes from "prop-types";
+import cn from 'classnames';
 import React from "react";
 
 
@@ -19,9 +20,17 @@ class Modal extends React.Component {
 
     render() {
         const {isOpen, children} = this.props
+        const btnClass = cn('modal', {
+            'fade show': isOpen,
+            '': !isOpen,
+        });
+        const btnStyle = cn({
+            'block': isOpen,
+            'none': !isOpen,
+        })
 
         return (
-            <div className={`modal ${isOpen ? 'fade show' : ''}`} style={{display: isOpen ? 'block' : 'none'}}
+            <div className={btnClass} style={{display: btnStyle}}
                  role='dialog'>
                 {children}
             </div>
