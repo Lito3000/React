@@ -1,13 +1,14 @@
 import {Component} from "react";
 import axios from "axios";
-import _ from 'lodash'
+import {uniqueId} from 'lodash'
 
-class GetUserPhoto extends Component {
+class Loader extends Component {
     constructor(props) {
         super(props);
         this.state = {
             oneHundredUserPieces: [],
             urlPhotos: [],
+            UIShowTable:false
         };
     }
 
@@ -22,30 +23,36 @@ class GetUserPhoto extends Component {
         const resPhotos = await axios.get(`https://jsonplaceholder.typicode.com/photos?albumId=${id}`);
         this.setState({
             urlPhotos: resPhotos.data,
+            UIShowTable:true
         });
     }
 
     renderItem = (elem) => {
         return (
-            <div className="container" key={_.uniqueId()}>
-                <div className="row align-items-start">
+            <div className="container" key={uniqueId()}>
+                <div className="row align-items-start" >
                     <button onClick={this.handleButton(elem.id)}>{elem.title}</button>
                 </div>
             </div>
         )
     }
-
+    handleClickBack =()=>{
+        this.setState({
+            UIShowTable:false
+        });
+    }
     render() {
         const {oneHundredUserPieces, urlPhotos} = this.state;
         return (
             <div>
                 <button className="list-group" onClick={this.handleClickAlbums}>Load Random Image</button>
-                {oneHundredUserPieces.map(item => this.renderItem(item))}
-                {urlPhotos.map(i => <img key={_.uniqueId()} src={i.url}/>)}
+                <button className="list-group" onClick={this.handleClickBack}>Back</button>
+                {!this.state.UIShowTable && oneHundredUserPieces.map(item => this.renderItem(item))}
+                {this.state.UIShowTable && urlPhotos.map(i => <img key={uniqueId()} src={i.url}/>)}
             </div>
 
         );
     }
 }
 
-export default GetUserPhoto;
+export default Loader;
