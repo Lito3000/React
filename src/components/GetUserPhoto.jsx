@@ -1,6 +1,6 @@
 import {Component} from "react";
 import axios from "axios";
-import _, {uniqueId} from 'lodash'
+import _ from 'lodash'
 
 class GetUserPhoto extends Component {
     constructor(props) {
@@ -27,9 +27,9 @@ class GetUserPhoto extends Component {
 
     renderItem = (elem) => {
         return (
-            <div className="container">
+            <div className="container" key={_.uniqueId()}>
                 <div className="row align-items-start">
-                    <button key={uniqueId()} onClick={this.handleButton(elem.id)}>{elem.title}</button>
+                    <button onClick={this.handleButton(elem.id)}>{elem.title}</button>
                 </div>
             </div>
         )
@@ -41,7 +41,7 @@ class GetUserPhoto extends Component {
             <div>
                 <button className="list-group" onClick={this.handleClickAlbums}>Load Random Image</button>
                 {oneHundredUserPieces.map(item => this.renderItem(item))}
-                {urlPhotos.map(i => <img key={uniqueId()} src={i.url}/>)}
+                {urlPhotos.map(i => <img key={_.uniqueId()} src={i.url}/>)}
             </div>
 
         );
