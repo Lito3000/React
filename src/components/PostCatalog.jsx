@@ -1,4 +1,6 @@
 import {Component} from 'react';
+import axios from "axios";
+import {uniqueId} from '.lodash'
 
 
 class PostCatalog extends Component {
@@ -6,23 +8,51 @@ class PostCatalog extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            posts: [],
             oneHundredUserPieces: [],
             urlPhotos: [],
             UIShowTable:false
         };
     }
-    async insertData() {
+     insertData = async () => {
         const res = await fetch('https://jsonplaceholder.typicode.com/posts')
         const post = await res.json();
         console.log(post)
-        this.setState({post});
+        this.setState({oneHundredUserPieces:post});
     }
+    // async insertData() {
+    //     try {
+    //         const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+    //         const posts = await res.json();
+    //         this.setState({ posts, loading: false });
+    //     } catch (error) {
+    //         console.error('Ошибка при получении статей', error);
+    //         this.setState({ error: 'Ошибка при загрузке данных', loading: false });
+    //     }
+    // }
+    // insertData = async () => {
+    //     const user100Pieces = await axios.get('https://jsonplaceholder.typicode.com/albums');
+    //     this.setState({
+    //         oneHundredUserPieces: user100Pieces.data,
+    //     });
+    //     console.log(user100Pieces.data)
+    // }
+    renderItem = (elem) => {
+        return (
+            <div className="container" key={uniqueId()}>
+<li key={uniqueId()}>{elem.title}</li>
 
+
+            </div>
+        )
+    }
     render() {
+        const {oneHundredUserPieces, urlPhotos} = this.state;
+
         return (
             <div>
                 <button onClick={this.insertData}>click</button>
-                {/*{!this.state.UIShowTable && oneHundredUserPieces.map(item => this.renderItem(item))}*/}
+                {!this.state.UIShowTable && oneHundredUserPieces.map(item => this.renderItem(item))}
                 {/*{this.state.UIShowTable && urlPhotos.map(i => <img key={uniqueId()} src={i.url}/>)}*/}
                 <div className="posts">
                     <ul className="posts__list">
