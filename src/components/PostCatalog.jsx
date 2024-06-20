@@ -13,10 +13,9 @@ class PostCatalog extends Component {
     }
     async insertData() {
         const res = await fetch('https://jsonplaceholder.typicode.com/posts')
-        console.log(res);
-        this.setState({
-            oneHundredUserPieces: res,
-        });
+        const post = await res.json();
+        console.log(post)
+        this.setState({post});
     }
 
     render() {

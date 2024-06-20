@@ -10,6 +10,17 @@ class Loader extends Component {
         };
     }
 
+    async componentDidMount() {
+        try {
+            const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+            const posts = await res.json();
+            this.setState({ posts, loading: false });
+        } catch (error) {
+            console.error('Ошибка при получении статей', error);
+            this.setState({ error: 'Ошибка при загрузке данных', loading: false });
+        }
+    }
+
     handleClickAlbums = async () => {
         const user100Pieces = await axios.get('https://jsonplaceholder.typicode.com/albums');
         this.setState({
