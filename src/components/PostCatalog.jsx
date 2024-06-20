@@ -8,7 +8,9 @@ class PostCatalog extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            oneHundredUserPieces: []
+            oneHundredUserPieces: [],
+            UIShowTable:false,
+            errResp:''
         };
     }
 
@@ -20,15 +22,14 @@ class PostCatalog extends Component {
     //     this.setState({oneHundredUserPieces: res.data});
     // }
     insertData = async () => {
-        const API = 'https://jsonplaceholder.typicode.com/posts'
-        let a  = fetch(API)
-        console.log(a)
-        a.then((response)=>{
-            response.json().then(
-                (data)=>{
-                    this.setState({oneHundredUserPieces: data});
-            })
-        })
+        const API = 'htts://jsonplaceholder.typicode.com/posts'
+        let request  = fetch(API)
+        console.log(request)
+        request
+            .catch(err => this.setState({UIShowTable:false,errResp:err}))
+            .then(response=> response.json())
+            .then( data => this.setState({oneHundredUserPieces: data}))
+
     }
     renderItem = (elem) => {
         return (
@@ -44,11 +45,12 @@ class PostCatalog extends Component {
     }
 
     render() {
-        const {oneHundredUserPieces} = this.state;
+        const {oneHundredUserPieces,errResp} = this.state;
 
         return (
             <div>
                 <button onClick={this.insertData}>button</button>
+                {!this.state.UIShowTable && <div>{errResp}</div>}
                 {!this.state.UIShowTable && oneHundredUserPieces.map(item => this.renderItem(item))}
             </div>
         );
