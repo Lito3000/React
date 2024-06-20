@@ -9,7 +9,12 @@ class Loader extends Component {
             UIShowTable:false
         };
     }
-
+    // insertData = async () => {
+    //     const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+    //     const post = await res.json();
+    //     console.log(post)
+    //     this.setState({oneHundredUserPieces: post});
+    // }
     async componentDidMount() {
         try {
             const res = await fetch('https://jsonplaceholder.typicode.com/posts');

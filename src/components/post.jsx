@@ -1,6 +1,5 @@
 import {Component} from 'react';
 import axios from "axios";
-import {uniqueId} from "lodash";
 
 
 class PostCatalog extends Component {
@@ -20,8 +19,6 @@ class PostCatalog extends Component {
     //     console.log(post)
     //     this.setState({post});
     // }
-
-
     // async insertData() {
     //     try {
     //         const res = await fetch('https://jsonplaceholder.typicode.com/posts');
@@ -32,14 +29,13 @@ class PostCatalog extends Component {
     //         this.setState({ error: 'Ошибка при загрузке данных', loading: false });
     //     }
     // }
-
-    // insertData = async () => {
-    //     const user100Pieces = await axios.get('https://jsonplaceholder.typicode.com/albums');
-    //     this.setState({
-    //         oneHundredUserPieces: user100Pieces.data,
-    //     });
-    //     console.log(user100Pieces.data)
-    // }
+    insertData = async () => {
+        const user100Pieces = await axios.get('https://jsonplaceholder.typicode.com/albums');
+        this.setState({
+            oneHundredUserPieces: user100Pieces.data,
+        });
+        console.log(user100Pieces.data)
+    }
     renderItem = (elem) => {
         return (
             <div className="container" key={uniqueId()}>
@@ -50,11 +46,11 @@ class PostCatalog extends Component {
         )
     }
     render() {
-        const {oneHundredUserPieces} = this.state;
+        const {oneHundredUserPieces, urlPhotos} = this.state;
 
         return (
             <div>
-                <button onClick={this.insertData.bind(this)}>click</button>
+                <button onClick={this.insertData}>click</button>
                 {!this.state.UIShowTable && oneHundredUserPieces.map(item => this.renderItem(item))}
                 {/*{this.state.UIShowTable && urlPhotos.map(i => <img key={uniqueId()} src={i.url}/>)}*/}
                 <div className="posts">
