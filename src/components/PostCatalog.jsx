@@ -1,6 +1,6 @@
 import {Component} from 'react';
-import axios from "axios";
 import {uniqueId} from "lodash";
+import axios from "axios";
 
 
 class PostCatalog extends Component {
@@ -8,68 +8,48 @@ class PostCatalog extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            posts: [],
-            oneHundredUserPieces: [],
-            urlPhotos: [],
-            UIShowTable:false
+            oneHundredUserPieces: []
         };
     }
-    // async insertData() {
-    //     const res = await fetch('https://jsonplaceholder.typicode.com/posts')
-    //     const post = await res.json();
-    //     console.log(post)
-    //     this.setState({post});
-    // }
 
 
-    // async insertData() {
-    //     try {
-    //         const res = await fetch('https://jsonplaceholder.typicode.com/posts');
-    //         const posts = await res.json();
-    //         this.setState({ posts, loading: false });
-    //     } catch (error) {
-    //         console.error('Ошибка при получении статей', error);
-    //         this.setState({ error: 'Ошибка при загрузке данных', loading: false });
-    //     }
+    // async componentDidMount() {
+    //     const res = await axios('https://jsonplaceholder.typicode.com/posts')
+    //
+    //     console.log(res)
+    //     this.setState({oneHundredUserPieces: res.data});
     // }
-
-    // insertData = async () => {
-    //     const user100Pieces = await axios.get('https://jsonplaceholder.typicode.com/albums');
-    //     this.setState({
-    //         oneHundredUserPieces: user100Pieces.data,
-    //     });
-    //     console.log(user100Pieces.data)
-    // }
+    insertData = async () => {
+        const API = 'https://jsonplaceholder.typicode.com/posts'
+        let a  = fetch(API)
+        console.log(a)
+        a.then((response)=>{
+            response.json().then(
+                (data)=>{
+                    this.setState({oneHundredUserPieces: data});
+            })
+        })
+    }
     renderItem = (elem) => {
         return (
-            <div className="container" key={uniqueId()}>
-                <li>{elem.title}</li>
-
-
+            <div key={uniqueId()} className="posts">
+                <ul className="posts__list">
+                    <li className="posts_single-post" data-post-id={elem.id}>
+                        <h3 className="posts__post-title">{elem.title}</h3>
+                        <p className="posts__post-description">{elem.body}</p>
+                    </li>
+                </ul>
             </div>
         )
     }
+
     render() {
         const {oneHundredUserPieces} = this.state;
 
         return (
             <div>
-                <button onClick={this.insertData.bind(this)}>click</button>
+                <button onClick={this.insertData}>button</button>
                 {!this.state.UIShowTable && oneHundredUserPieces.map(item => this.renderItem(item))}
-                {/*{this.state.UIShowTable && urlPhotos.map(i => <img key={uniqueId()} src={i.url}/>)}*/}
-                <div className="posts">
-                    <ul className="posts__list">
-                        <li className="posts_single-post" data-post-id="Id поста">
-                            <h3 className="posts__post-title">Заголовок поста</h3>
-                            <p className="posts__post-description">Контент поста</p>
-                        </li>
-
-                        <li className="posts_single-post" data-post-id="Id следующего поста">
-                            <h3 className="posts__post-title">Заголовок поста</h3>
-                            <p className="posts__post-description">Контент поста</p>
-                        </li>
-                    </ul>
-                </div>
             </div>
         );
     }

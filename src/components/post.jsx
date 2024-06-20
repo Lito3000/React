@@ -29,6 +29,7 @@ class PostCatalog extends Component {
     //         this.setState({ error: 'Ошибка при загрузке данных', loading: false });
     //     }
     // }
+
     insertData = async () => {
         const user100Pieces = await axios.get('https://jsonplaceholder.typicode.com/albums');
         this.setState({
@@ -36,12 +37,22 @@ class PostCatalog extends Component {
         });
         console.log(user100Pieces.data)
     }
+    // insertData = async () => {
+    //     const user100Pieces = await axios.get('https://jsonplaceholder.typicode.com/albums');
+    //     this.setState({
+    //         oneHundredUserPieces: user100Pieces.data,
+    //     });
+    //     console.log(user100Pieces.data)
+    // }
     renderItem = (elem) => {
         return (
-            <div className="container" key={uniqueId()}>
-                <li>{elem.title}</li>
-
-
+            <div key={uniqueId()} className="posts">
+                <ul className="posts__list">
+                    <li className="posts_single-post" data-post-id={elem.id}>
+                        <h3 className="posts__post-title">{elem.title}</h3>
+                        <p className="posts__post-description">{elem.body}</p>
+                    </li>
+                </ul>
             </div>
         )
     }
