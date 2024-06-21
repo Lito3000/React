@@ -1,5 +1,6 @@
 import {Component} from 'react';
 import {uniqueId} from "lodash";
+import PropTypes from "prop-types";
 
 
 class PostCatalog extends Component {
@@ -7,12 +8,14 @@ class PostCatalog extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            oneHundredUserPieces: [],
+            posts: [],
             UIShowTable: false,
-            errResp: ''
+            errResp: '',
+            modified: false
         };
     }
-   componentDidMount() {
+
+    componentDidMount() {
 
         const p = new Promise(function (resolve, reject) {
             setTimeout(() => {
@@ -29,18 +32,20 @@ class PostCatalog extends Component {
                 return new Promise((resolve, reject) => {
                     setTimeout(() => {
                         data.modified = true
+                        this.setState({modified: data.modified})
                         resolve(data.json())
                     }, 2000)
                 })
             })
             .then(clientData => {
                 console.log('Data recived', clientData)
-                this.setState({oneHundredUserPieces: clientData})
+                this.setState({posts: clientData})
             })
             .catch(() => {
                 return this.setState({UIShowTable: false, errResp: 'err'})
             })
     }
+
     renderItem = (elem) => {
         return (
             <div key={uniqueId()} className="posts">
@@ -55,14 +60,23 @@ class PostCatalog extends Component {
     }
 
     render() {
-        const {oneHundredUserPieces, errResp} = this.state;
+        const {posts, errResp,modified,UIShowTable} = this.state;
         return (
             <div>
-                {!this.state.UIShowTable && <div>{errResp}</div>}
-                {!this.state.UIShowTable && oneHundredUserPieces.map(item => this.renderItem(item))}
+                {!UIShowTable && <div>{modified}</div>}
+                {!UIShowTable && <div>{errResp}</div>}
+                {!UIShowTable && posts.map(item => this.renderItem(item))}
             </div>
         );
     }
 }
 
+PostCatalog.propTypes = {
+    posts: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        body: PropTypes.string.isRequired
+    })),
+    modified: PropTypes.bool.isRequired
+};
 export default PostCatalog
