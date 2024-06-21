@@ -1,6 +1,7 @@
 import {Component} from "react";
 import axios from "axios";
 import {uniqueId} from 'lodash'
+import PropTypes from "prop-types";
 
 class Loader extends Component {
     constructor(props) {
@@ -8,7 +9,7 @@ class Loader extends Component {
         this.state = {
             oneHundredUserPieces: [],
             urlPhotos: [],
-            UIShowTable:false
+            UIShowTable: false
         };
     }
 
@@ -23,24 +24,25 @@ class Loader extends Component {
         const resPhotos = await axios.get(`https://jsonplaceholder.typicode.com/photos?albumId=${id}`);
         this.setState({
             urlPhotos: resPhotos.data,
-            UIShowTable:true
+            UIShowTable: true
         });
     }
 
     renderItem = (elem) => {
         return (
             <div className="container" key={uniqueId()}>
-                <div className="row align-items-start" >
+                <div className="row align-items-start">
                     <button onClick={this.handleButton(elem.id)}>{elem.title}</button>
                 </div>
             </div>
         )
     }
-    handleClickBack =()=>{
+    handleClickBack = () => {
         this.setState({
-            UIShowTable:false
+            UIShowTable: false
         });
     }
+
     render() {
         const {oneHundredUserPieces, urlPhotos} = this.state;
         return (
@@ -55,4 +57,9 @@ class Loader extends Component {
     }
 }
 
+Loader.propTypes = {
+    oneHundredUserPieces: PropTypes.arrayOf,
+    urlPhotos: PropTypes.arrayOf,
+
+};
 export default Loader;
