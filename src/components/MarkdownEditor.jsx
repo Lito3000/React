@@ -1,5 +1,6 @@
 import React from "react";
 import Editor from '@toast-ui/editor';
+import PropTypes from "prop-types";
 
 class MarkdownEditor extends React.Component {
 
@@ -23,5 +24,7 @@ class MarkdownEditor extends React.Component {
         );
     }
 }
-
+MarkdownEditor.propTypes = {
+    onContentChange: PropTypes.func.isRequired,
+};
 export default MarkdownEditor;
