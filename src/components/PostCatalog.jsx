@@ -60,10 +60,10 @@ class PostCatalog extends Component {
     }
 
     render() {
-        const {posts, errResp,modified,UIShowTable} = this.state;
+        const {posts, errResp, modified, UIShowTable} = this.state;
         return (
             <div>
-                {!UIShowTable && <div>{modified}</div>}
+                {!modified && <div>Preparing data....</div>}
                 {!UIShowTable && <div>{errResp}</div>}
                 {!UIShowTable && posts.map(item => this.renderItem(item))}
             </div>
@@ -77,6 +77,6 @@ PostCatalog.propTypes = {
         title: PropTypes.string.isRequired,
         body: PropTypes.string.isRequired
     })),
-    modified: PropTypes.bool.isRequired
+    modified: PropTypes.bool
 };
 export default PostCatalog
