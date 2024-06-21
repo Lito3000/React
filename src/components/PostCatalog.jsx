@@ -12,15 +12,7 @@ class PostCatalog extends Component {
             errResp: ''
         };
     }
-
-
-    // async componentDidMount() {
-    //     const res = await axios('https://jsonplaceholder.typicode.com/posts')
-    //
-    //     console.log(res)
-    //     this.setState({oneHundredUserPieces: res.data});
-    // }
-    insertData = async () => {
+   componentDidMount() {
 
         const p = new Promise(function (resolve, reject) {
             setTimeout(() => {
@@ -45,12 +37,9 @@ class PostCatalog extends Component {
                 console.log('Data recived', clientData)
                 this.setState({oneHundredUserPieces: clientData})
             })
-            .catch (() => {return this.setState({UIShowTable: false, errResp: 'err'})})
-
-        // request
-        //     .then(response => response.json())
-        //     .then(data => this.setState({oneHundredUserPieces: data}))
-        //     .catch(err => this.setState({UIShowTable: false, errResp: err}))
+            .catch(() => {
+                return this.setState({UIShowTable: false, errResp: 'err'})
+            })
     }
     renderItem = (elem) => {
         return (
@@ -67,11 +56,8 @@ class PostCatalog extends Component {
 
     render() {
         const {oneHundredUserPieces, errResp} = this.state;
-
-
         return (
             <div>
-                <button onClick={this.insertData}>button</button>
                 {!this.state.UIShowTable && <div>{errResp}</div>}
                 {!this.state.UIShowTable && oneHundredUserPieces.map(item => this.renderItem(item))}
             </div>
