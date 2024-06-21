@@ -1,6 +1,5 @@
 import {Component} from 'react';
 import {uniqueId} from "lodash";
-import axios from "axios";
 
 
 class PostCatalog extends Component {
@@ -9,8 +8,8 @@ class PostCatalog extends Component {
         super(props);
         this.state = {
             oneHundredUserPieces: [],
-            UIShowTable:false,
-            errResp:''
+            UIShowTable: false,
+            errResp: ''
         };
     }
 
@@ -22,14 +21,36 @@ class PostCatalog extends Component {
     //     this.setState({oneHundredUserPieces: res.data});
     // }
     insertData = async () => {
-        const API = 'htts://jsonplaceholder.typicode.com/posts'
-        let request  = fetch(API)
-        console.log(request)
-        request
-            .catch(err => this.setState({UIShowTable:false,errResp:err}))
-            .then(response=> response.json())
-            .then( data => this.setState({oneHundredUserPieces: data}))
 
+        const p = new Promise(function (resolve, reject) {
+            setTimeout(() => {
+                    console.log('Preparing data....')
+                    const API = 'https://jsonplaceholder.typicode.com/posts'
+                    let request = fetch(API)
+                    resolve(request)
+                }
+                , 2000)
+        })
+        p
+            .then((data) => {
+                console.log('Promise resolved', data)
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        data.modified = true
+                        resolve(data.json())
+                    }, 2000)
+                })
+            })
+            .then(clientData => {
+                console.log('Data recived', clientData)
+                this.setState({oneHundredUserPieces: clientData})
+            })
+            .catch (() => {return this.setState({UIShowTable: false, errResp: 'err'})})
+
+        // request
+        //     .then(response => response.json())
+        //     .then(data => this.setState({oneHundredUserPieces: data}))
+        //     .catch(err => this.setState({UIShowTable: false, errResp: err}))
     }
     renderItem = (elem) => {
         return (
@@ -45,7 +66,8 @@ class PostCatalog extends Component {
     }
 
     render() {
-        const {oneHundredUserPieces,errResp} = this.state;
+        const {oneHundredUserPieces, errResp} = this.state;
+
 
         return (
             <div>
