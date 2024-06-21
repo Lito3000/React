@@ -58,8 +58,8 @@ class Loader extends Component {
 }
 
 Loader.propTypes = {
-    oneHundredUserPieces: PropTypes.arrayOf,
-    urlPhotos: PropTypes.arrayOf,
+    oneHundredUserPieces: PropTypes.array,
+    urlPhotos: PropTypes.array,
 
 };
 export default Loader;
