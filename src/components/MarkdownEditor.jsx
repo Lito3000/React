@@ -9,6 +9,9 @@ class MarkdownEditor extends React.Component {
         const editor = new Editor({
             el: document.querySelector('#editor'),
             hideModeSwitch: true,
+            height: '600px',
+            initialEditType: 'markdown',
+            previewStyle: 'vertical'
         });
 
         editor.addHook('change', () => {
