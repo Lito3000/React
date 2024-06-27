@@ -1,43 +1,56 @@
 import {useState} from 'react';
-import {cloneDeep, uniqueId} from 'lodash';
+import _, {uniqueId} from 'lodash';
+import InputTodoBox from "./InputTodoBox.jsx";
 
-const HookComponent = (props) => {
+const HookComponent = () => {
 
     const [TodoBox, setTodoBox] = useState('');
     const [SaveData, setSaveData] = useState([]);
-
-    // const handleClick = () => {
-    //     setCount(count + 1)
-    // }
-
     const handleChange = (event) => {
-        const previousState = cloneDeep(TodoBox)
-        setTodoBox(previousState)
         setTodoBox(event.target.value)
     }
 
+    const handleSabmit = () => (event) => {
+        event.preventDefault()
+        const oldState = _.cloneDeep(TodoBox)
+        const todoData = _.cloneDeep(SaveData)
+        let arrComponent = []
+        arrComponent.push({
+            saveData: oldState,
+            idData: uniqueId('iddName')
+        })
+        let third = todoData.concat(arrComponent);
+        setSaveData(third)
+        setTodoBox('')
+    }
+    const removeItem = (id) => (e) => {
+        e.preventDefault();
+        const todoData = _.cloneDeep(SaveData)
+        const newItems = todoData.filter(function (item) {
+            if (item.idData !== id) {
+                return item
+            }
+        });
+        setSaveData(newItems)
+        setTodoBox('')
+    };
+    const renderFunction = (item) => {
+        return <div key={item.saveData + uniqueId('iddDiv')} className="row">
+            <div className="col-auto">
+                <button type="button"
+                        onClick={removeItem(item.idData)}
+                        className="btn btn-primary btn-sm">-
+                </button>
+            </div>
+            <div className="col">{item.saveData}</div>
+            <hr/>
+        </div>
+    }
 
     return (
         <div>
-            <div className="mb-3">
-                <form className="d-flex">
-                    <div className="me-3">
-                        <input
-                            type="text"
-                            name='TodoBox'
-                            value={TodoBox}
-                            required=""
-                            className="form-control"
-                            placeholder="I am going..."
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <button type="submit"
-                            className="btn btn-primary">add
-                    </button>
-                </form>
-            </div>
-            {/*{this.state.formData.saveData.map(item => this.renderFunction(item))}*/}
+            <InputTodoBox Change={handleChange} Click = {handleSabmit} value = {TodoBox}/>
+            {SaveData.map(item => renderFunction(item))}
         </div>
     );
 };
