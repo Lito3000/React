@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import _, {uniqueId} from 'lodash';
 import InputTodoBox from "./InputTodoBox.jsx";
+import PropTypes from "prop-types";
 
 const HookComponent = () => {
 
@@ -10,19 +11,17 @@ const HookComponent = () => {
         setTodoBox(event.target.value)
     }
 
-    const handleSabmit = () => (event) => {
-        event.preventDefault()
-        const oldState = _.cloneDeep(TodoBox)
-        const todoData = _.cloneDeep(SaveData)
-        let arrComponent = []
-        arrComponent.push({
-            saveData: oldState,
-            idData: uniqueId('iddName')
-        })
-        let third = todoData.concat(arrComponent);
-        setSaveData(third)
-        setTodoBox('')
-    }
+    const handleSabmit = () => (e) => {
+        e.preventDefault();
+        if (TodoBox.trim() !== '') {
+            const newData = {
+                idData: uniqueId(),
+                saveData: TodoBox
+            };
+            setSaveData([newData, ...SaveData]);
+            setTodoBox('');
+        }
+    };
     const removeItem = (id) => (e) => {
         e.preventDefault();
         const todoData = _.cloneDeep(SaveData)
@@ -53,5 +52,13 @@ const HookComponent = () => {
         </div>
     );
 };
-
+HookComponent.propTypes = {
+    saveData: PropTypes.arrayOf(
+        PropTypes.shape({
+            idData: PropTypes.string.isRequired,
+            saveDate: PropTypes.string.isRequired
+        })
+    ),
+    TodoBox: PropTypes.string
+};
 export default HookComponent;

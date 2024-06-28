@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 const InputTodoBox = (init) => {
     return (
         <div className="mb-3">
@@ -20,5 +21,9 @@ const InputTodoBox = (init) => {
         </div>
     );
 }
-
+InputTodoBox.propTypes = {
+    value: PropTypes.string.isRequired,
+    Change: PropTypes.func.isRequired,
+    Click:PropTypes.func.isRequired
+};
 export default InputTodoBox
