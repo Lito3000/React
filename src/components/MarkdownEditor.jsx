@@ -3,7 +3,7 @@ import Editor from '@toast-ui/editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import PropTypes from "prop-types";
 
-const MarkdownEditor = (item) => {
+const MarkdownEditor = ({textView}) => {
 
 
     const textEditor = useRef(null)
@@ -19,7 +19,7 @@ const MarkdownEditor = (item) => {
 
         editor.addHook('change', () => {
             const content = editor.getMarkdown();
-            item.textView(content)
+            textView(content)
         });
     }, [])
 
