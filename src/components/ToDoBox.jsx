@@ -11,7 +11,7 @@ const HookComponent = () => {
         setTodoBox(event.target.value)
     }
 
-    const handleSabmit = () => (e) => {
+    const handleSabmit  = (e) => {
         e.preventDefault();
         if (TodoBox.trim() !== '') {
             const newData = {

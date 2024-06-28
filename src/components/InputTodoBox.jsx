@@ -14,7 +14,7 @@ const InputTodoBox = (init) => {
                         onChange={init.Change}
                     />
                 </div>
-                <button type="submit" onClick={init.Click()}
+                <button type="submit" onClick={init.Click}
                         className="btn btn-primary">add
                 </button>
             </form>
