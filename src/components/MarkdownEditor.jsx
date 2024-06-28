@@ -1,13 +1,12 @@
-import React, {useEffect, useRef} from "react";
+import {useEffect, useRef} from "react";
 import Editor from '@toast-ui/editor';
 import '@toast-ui/editor/dist/toastui-editor.css'; // Editor's Style
 
-const MarkdownEditor = (props) => {
+const MarkdownEditor = (item) => {
 
 
     const textRef = useRef(null)
     useEffect(() => {
-        const {textView} = props
         const editor = new Editor({
             el: textRef.current,
             hideModeSwitch: true,
@@ -15,10 +14,11 @@ const MarkdownEditor = (props) => {
             initialEditType: 'markdown',
             previewStyle: 'vertical'
         });
+        console.log(editor)
 
         editor.addHook('change', () => {
             const content = editor.getMarkdown();
-            textView(content)
+            item.textView(content)
         });
     }, [])
 
