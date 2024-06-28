@@ -1,29 +1,31 @@
-import {useEffect, useRef} from "react";
+import React, {useEffect, useRef} from "react";
 import Editor from '@toast-ui/editor';
 import '@toast-ui/editor/dist/toastui-editor.css'; // Editor's Style
 
-const MarkdownEditor = () => {
-    // null – начальное значение
-    const textArea = useRef(null);
+const MarkdownEditor = (props) => {
 
-    // const onButtonClick = () => {
-    //     // `current` указывает на смонтированный элемент `input`
-    //     inputEl.current.focus();
-    // };
 
+    const textRef = useRef(null)
     useEffect(() => {
+        const {textView} = props
         const editor = new Editor({
-            el: textArea.current,
+            el: textRef.current,
+            hideModeSwitch: true,
             height: '500px',
             initialEditType: 'markdown',
             previewStyle: 'vertical'
         });
-    }, [])
 
+        editor.addHook('change', () => {
+            const content = editor.getMarkdown();
+            textView(content)
+        });
+    }, [])
 
     return (
         <>
-            <textarea ref={textArea}></textarea>
+            <div ref={textRef}></div>
+
         </>
     );
 }
