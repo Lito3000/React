@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import React, {useState} from 'react';
 import _, {uniqueId} from 'lodash';
 import InputTodoBox from "./InputTodoBox.jsx";
 
@@ -32,7 +32,6 @@ const HookComponent = () => {
             }
         });
         setSaveData(newItems)
-        setTodoBox('')
     };
     const renderFunction = (item) => {
         return <div key={item.saveData + uniqueId('iddDiv')} className="row">
@@ -49,7 +48,7 @@ const HookComponent = () => {
 
     return (
         <div>
-            <InputTodoBox Change={handleChange} Click = {handleSabmit} value = {TodoBox}/>
+            <InputTodoBox Change={handleChange} Click={handleSabmit} value={TodoBox}/>
             {SaveData.map(item => renderFunction(item))}
         </div>
     );
