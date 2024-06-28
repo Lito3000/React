@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import _, {uniqueId} from 'lodash';
 import InputTodoBox from "./InputTodoBox.jsx";
 
