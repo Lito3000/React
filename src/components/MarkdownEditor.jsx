@@ -21,7 +21,7 @@ const MarkdownEditor = ({textView}) => {
             const content = editor.getMarkdown();
             textView(content)
         });
-    },[])
+    },[textView])
 
     return (
         <>
