@@ -1,7 +1,6 @@
 import {useEffect, useRef} from "react";
 import Editor, {toastui} from '@toast-ui/editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
-import PropTypes from "prop-types";
 
 const MarkdownEditor = ({textView}) => {
 
