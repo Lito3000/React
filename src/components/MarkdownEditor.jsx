@@ -2,7 +2,7 @@ import {useEffect, useRef} from "react";
 import Editor, {toastui} from '@toast-ui/editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 
-const MarkdownEditor = ({textView}) => {
+const MarkdownEditor = () => {
 
     const { Editor } = toastui;
     const { chart } = Editor.plugin;
@@ -12,12 +12,20 @@ const MarkdownEditor = ({textView}) => {
         const editor = new Editor({
             el: textEditor.current,
             hideModeSwitch: true,
+            previewStyle: 'vertical',
             height: '500px',
-            initialEditType: 'markdown',
-            previewStyle: 'vertical'
+            initialValue: chartContent,
+            plugins: [[chart, chartOptions]]
         });
         console.log(editor)
 
+        const viewer = Editor.factory({
+            el: document.querySelector('#viewer'),
+            viewer: true,
+            height: '500px',
+            initialValue: chartContent,
+            plugins: [[chart, chartOptions]]
+        });
     },[]);
 
     return (
