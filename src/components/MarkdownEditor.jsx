@@ -19,11 +19,7 @@ const MarkdownEditor = ({textView}) => {
         });
         console.log(editor)
 
-        editor.addHook('change', () => {
-            const content = editor.getMarkdown();
-            textView(content)
-        });
-    },[textView]);
+    },[]);
 
     return (
         <>
@@ -31,7 +27,5 @@ const MarkdownEditor = ({textView}) => {
         </>
     );
 };
-MarkdownEditor.propTypes = {
-    textView: PropTypes.func.isRequired,
-};
+
 export default MarkdownEditor;
