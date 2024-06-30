@@ -26,7 +26,7 @@ const MarkdownEditor = () => {
             initialValue: chartContent,
             plugins: [[chart, chartOptions]]
         });
-    },[]);
+    },[Editor, chart]);
 
     return (
         <>
