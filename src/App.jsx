@@ -1,14 +1,14 @@
+import Nav from './components/Nav/index.jsx'
+import NavRoutes from './components/NavRoutes'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css'
-import ToDoBox from "./components/ToDoBox.jsx";
 
-function App() {
-
-
-  return (
-      <ToDoBox/>
-  )
+export default function App() {
+    return (
+        <div>
+            <h1 className="text-center mt-5 mb-5">TODO LIST</h1>
+            <Nav/>
+            <hr/>
+            <NavRoutes/>
+        </div>
+    )
 }
-
-export default App
-
