@@ -5,6 +5,13 @@ import './style.css'
 import {Link} from "react-router-dom";
 import {useState} from "react";
 import {uniqueId} from "lodash";
+// import SingleData from "../routes/SingleInvoice.jsx";
+import DataComponent from "../routes/DataComponent.jsx";
+import NavRoutes from "../NavRoutes/index.jsx";
+// import DataComponent from "../routes/SingleInvoice.jsx";
+// import InputTodoBox from "../../components1/InputTodoBox.jsx";
+// import Data from "bootstrap/js/src/dom/data.js";
+// import Data from "../data/DataComponent.jsx";
 // import {getInvoices} from "../data/Data";
 
 const Nav = () => {
@@ -66,6 +73,7 @@ const Nav = () => {
             </div>
 
             <nav className='navigation-example'>
+                <Link to="/invoises">Inv</Link>
                 {SaveData.map((invoice, index) => (
                     <Link
                         to={`/invoices/${index}`}
@@ -74,9 +82,13 @@ const Nav = () => {
                         {invoice.saveData}
                     </Link>
                 ))}
+
             </nav>
+            <DataComponent idDataComponent={SaveData} setSaveData1={setSaveData}/>
+            <NavRoutes fr={SaveData} dyte={setSaveData}/>
         </div>
     </div>
-}
-export default Nav;
 
+}
+
+export default Nav;
