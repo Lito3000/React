@@ -73,13 +73,13 @@ const Nav = () => {
             </div>
 
             <nav className='navigation-example'>
-                <Link to="/invoises">Inv</Link>
+                <Link to="/invoises">to do list</Link>
                 {SaveData.map((invoice, index) => (
                     <Link
                         to={`/invoices/${index}`}
                         key={invoice.saveData}
                     >
-                        {invoice.saveData}
+                        {`to do list ${index}`}
                     </Link>
                 ))}
 
